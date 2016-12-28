@@ -48,6 +48,8 @@ public:
     manipulated_keys_.clear();
     manipulated_fn_keys_.clear();
 
+    reset_coder_layout();
+
     modifier_flag_manager_.reset();
     modifier_flag_manager_.unlock();
 
@@ -114,6 +116,12 @@ public:
                              krbn::key_code from_key_code,
                              bool pressed) {
     krbn::key_code to_key_code = from_key_code;
+
+    // ----------------------------------------
+    // process coder layout
+    if (process_coder_layout(to_key_code, pressed)) {
+      return;
+    }
 
     // ----------------------------------------
     // modify keys
@@ -350,6 +358,186 @@ private:
     std::unordered_map<krbn::key_code, krbn::key_code> map_;
     std::mutex mutex_;
   };
+
+
+
+  // CODER LAYOUT
+  // -------------------
+  bool MOD_APP_SWITCH = false;
+  bool MOD_SPACEBAR = false;
+  bool app_switch_triggered = false;
+  std::unique_ptr<gcd_utility::main_queue_timer> spacebar_timer_;
+
+  void post_key(std::string key_name) {
+    post_key(key_name, true);
+    post_key(key_name, false);
+  }
+
+  void post_key(std::string key_name, bool pressed) {
+    if (auto key = krbn::types::get_key_code(key_name)) {
+      if (!post_modifier_flag_event(*key, pressed)) {
+        post_key(*key, pressed);
+      }
+    } else {
+      logger::get_logger().warn("invalid key: {1}", key_name);
+    }
+  }
+
+  bool is_key(krbn::key_code key_code, std::string key_name) {
+    auto key_code_by_name = krbn::types::get_key_code(key_name);
+    return key_code_by_name == key_code;
+  }
+
+  bool process_coder_layout(krbn::key_code key_code, bool pressed) {
+
+    // Keep track of space bar state
+    if (is_key(key_code, "spacebar")) {
+      MOD_SPACEBAR = pressed;
+    }
+
+    // APP SWITCHING
+    // --------------------
+    //
+    // 4 = most recent app
+    // 4 + 3 = backward in apps
+    // 4 + r = forward in apps
+    //
+    // Requires app-switching to be mapped to cmd-tab
+    //
+
+    // Start app/window switch mode by pressing "4".
+    if (is_key(key_code, "4") && !MOD_SPACEBAR) {
+      MOD_APP_SWITCH = pressed;
+      if (pressed) {
+        post_key("left_command", true);
+      } else {
+        if (!app_switch_triggered) {
+          post_key("tab");
+        }
+        MOD_APP_SWITCH = false;
+        app_switch_triggered = false;
+        post_key("left_command", false);
+      }
+      return true;
+    }
+
+    if (MOD_APP_SWITCH) {
+      // Previous app by pressing "3".
+      if (is_key(key_code, "3")) {
+        if (pressed) {
+          app_switch_triggered = true;
+          post_key("left_shift", true);
+          post_key("tab");
+          post_key("left_shift", false);
+        }
+      }
+      // Next app by pressing "r".
+      if (is_key(key_code, "r")) {
+        if (pressed) {
+          app_switch_triggered = true;
+          post_key("tab");
+        }
+      }
+      return true;
+    }
+
+    // WINDOW SWITCHING
+    // --------------------
+    //
+    // space + 4 = next window
+    // space + 3 = previous window
+    //
+    // Requires window-switching to be mapped to ctrl-cmd-tab
+    //
+
+    // next window by pressing "4".
+    if (is_key(key_code, "4") && MOD_SPACEBAR) {
+      if (pressed) {
+        post_key("left_command", true);
+        post_key("left_control", true);
+        post_key("tab");
+        post_key("left_control", false);
+        post_key("left_command", false);
+      }
+      return true;
+    }
+
+    // previous window by pressing "3".
+    if (is_key(key_code, "3") && MOD_SPACEBAR) {
+      if (pressed) {
+        post_key("left_command", true);
+        post_key("left_control", true);
+        post_key("left_shift", true);
+        post_key("tab");
+        post_key("left_shift", false);
+        post_key("left_control", false);
+        post_key("left_command", false);
+      }
+      return true;
+    }
+
+    // SPACEBAR as SHIFT
+    // ----------------------
+    //
+    // Keeping space bar pressed will make it act as shift key.
+    //
+    if (pressed) {
+      if (is_key(key_code, "spacebar")) {
+        // After 200ms we will set shift modifier flag unless spacebar key
+        // got released or another key was pressed before.
+        long spacebar_milliseconds = 200;
+        spacebar_timer_ = std::make_unique<gcd_utility::main_queue_timer>(
+            DISPATCH_TIMER_STRICT,
+            dispatch_time(DISPATCH_TIME_NOW, spacebar_milliseconds * NSEC_PER_MSEC),
+            spacebar_milliseconds * NSEC_PER_MSEC,
+            0,
+            ^{
+              post_key("left_shift", true);
+              spacebar_timer_ = nullptr;
+            });
+        return true;
+      } else {
+        // Another key was pressed while spacebar is pressed.
+        // Activate shift.
+        if (spacebar_timer_ != nullptr) {
+          post_key("left_shift", true);
+          spacebar_timer_ = nullptr;
+        }
+      }
+    } else {
+      if (is_key(key_code, "spacebar")) {
+        // If spacebar was released sooner than 200ms and no other key was
+        // pressed meanwhile, then post a space
+        if (spacebar_timer_ != nullptr) {
+          spacebar_timer_ = nullptr;
+          post_key("spacebar");
+          return true;
+        } else {
+          post_key("left_shift", false);
+          return true;
+        }
+      }
+    }
+
+
+    // NAVIGATION LAYER
+    // ----------------------
+    //
+    // Pressing Caps-Lock or quote activates navigation layer.
+    //
+
+    return false;
+  }
+
+  void reset_coder_layout(void) {
+    MOD_APP_SWITCH = false;
+    MOD_SPACEBAR = false;
+    app_switch_triggered = false;
+    spacebar_timer_ = nullptr;
+  }
+
+
+
 
   bool post_modifier_flag_event(krbn::key_code key_code, bool pressed, uint64_t timestamp) {
     auto operation = pressed ? manipulator::modifier_flag_manager::operation::increase : manipulator::modifier_flag_manager::operation::decrease;
