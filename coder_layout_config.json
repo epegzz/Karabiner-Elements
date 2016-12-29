@@ -10,7 +10,6 @@
       	"u": "delete_or_backspace",
       	"o": "delete_forward",
       	"h": ["left_command", "left_arrow"],
-      	"r": "x",
       	"semicolon": ["left_command", "right_arrow"]
       }
     },
@@ -24,7 +23,6 @@
       	"u": ["left_option", "delete_or_backspace"],
       	"o": ["left_option", "delete_forward"],
       	"h": ["left_command", "left_arrow"],
-      	"r": "t",
       	"semicolon": ["left_command", "right_arrow"]
       }
     }

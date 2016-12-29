@@ -571,6 +571,26 @@ private:
       return true;
     }
 
+    // MODS on Numbers row
+    // --------------------
+    //
+    // non_us_backslash = shift
+    // 1 = right_control
+    // 2 = right_command
+    // 3 = right_option
+    // 9 = right_option
+    // 0 = right_command
+    // hyphen = right_control
+    // equal_sign = right_shift
+    if (is_key(key_code, "non_us_backslash")) { post_key("right_shift", pressed); return true; };
+    if (is_key(key_code, "1")) { post_key("right_control", pressed); return true; };
+    if (is_key(key_code, "2")) { post_key("right_command", pressed); return true; };
+    if (is_key(key_code, "3")) { post_key("right_option", pressed); return true; };
+    if (is_key(key_code, "9")) { post_key("right_option", pressed); return true; };
+    if (is_key(key_code, "0")) { post_key("right_command", pressed); return true; };
+    if (is_key(key_code, "hyphen")) { post_key("right_control", pressed); return true; };
+    if (is_key(key_code, "equal_sign")) { post_key("right_shift", pressed); return true; };
+
     // SPACEBAR as space, shift or escape
     // ----------------------
     //
@@ -637,13 +657,6 @@ private:
       auto mappings = MOD_SPACEBAR ?
                       coder_layout_.navigation_extra_mapping :
                       coder_layout_.navigation_mapping;
-
-      // Allow mods in navigation mode
-      // TODO: move further up and replace simple modifications from karabiner
-      if (is_key(key_code, "non_us_backslash")) return false;
-      if (is_key(key_code, "1")) return false;
-      if (is_key(key_code, "2")) return false;
-      if (is_key(key_code, "3")) return false;
 
       for (const auto& mapping : mappings) {
         if (key_code == mapping.from_key_code) {
