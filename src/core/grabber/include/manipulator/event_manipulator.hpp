@@ -377,6 +377,7 @@ private:
       std::vector<coder_layout_mapping> navigation_mapping;
       std::vector<coder_layout_mapping> navigation_extra_mapping;
       std::vector<coder_layout_mapping> coding_mapping;
+      std::vector<coder_layout_mapping> numbers_mapping;
       nlohmann::json json_;
 
       coder_layout(void) {
@@ -404,6 +405,7 @@ private:
           navigation_mapping = get_key_code_mapping_from_json_object(json_["layers"]["navigation"]["mapping"]);
           navigation_extra_mapping = get_key_code_mapping_from_json_object(json_["layers"]["navigation_extra"]["mapping"]);
           coding_mapping = get_key_code_mapping_from_json_object(json_["layers"]["coding"]["mapping"]);
+          numbers_mapping = get_key_code_mapping_from_json_object(json_["layers"]["numbers"]["mapping"]);
 
         } catch (std::exception& e) {
           logger::get_logger().warn("parse error: {0}", e.what());
@@ -515,6 +517,21 @@ private:
     if (is_key(key_code, "left_shift")) {
       post_key("right_shift", pressed);
       return true;
+    }
+
+    // NUMBERS LAYER
+    // ----------------------
+    //
+    // Pressing grave_accent_and_tilde activates numbers layer.
+    //
+
+    if (is_key(key_code, "grave_accent_and_tilde")) {
+      MOD_NUMBERS = pressed;
+      return true;
+    }
+
+    if (MOD_NUMBERS) {
+      return process_key_in_layer(key_code, pressed, coder_layout_.numbers_mapping, true);
     }
 
     // APP SWITCHING
@@ -705,6 +722,21 @@ private:
 
     if (MOD_CODING) {
       return process_key_in_layer(key_code, pressed, coder_layout_.coding_mapping, false);
+    }
+
+    // NUMBERS LAYER
+    // ----------------------
+    //
+    // Pressing grave_accent_and_tilde activates numbers layer.
+    //
+
+    if (is_key(key_code, "grave_accent_and_tilde")) {
+      MOD_NUMBERS = pressed;
+      return true;
+    }
+
+    if (MOD_NUMBERS) {
+      return process_key_in_layer(key_code, pressed, coder_layout_.numbers_mapping, true);
     }
 
     return false;
