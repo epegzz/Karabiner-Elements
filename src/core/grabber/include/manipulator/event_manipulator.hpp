@@ -16,6 +16,12 @@
 #include <thread>
 #include <unordered_map>
 
+// ----- start coder layout -------
+#include <json/json.hpp>
+#include <fstream>
+#include <vector>
+// ----- end coder layout -------
+
 namespace manipulator {
 class event_manipulator final {
 public:
@@ -117,11 +123,11 @@ public:
                              bool pressed) {
     krbn::key_code to_key_code = from_key_code;
 
-    // ----------------------------------------
-    // process coder layout
+    // ----- start coder layout -------
     if (process_coder_layout(to_key_code, pressed)) {
       return;
     }
+    // ----- end coder layout -------
 
     // ----------------------------------------
     // modify keys
@@ -360,12 +366,101 @@ private:
   };
 
 
+  // ----- start coder layout -------
+  struct coder_layout_mapping {
+    krbn::key_code from_key_code;
+    std::vector<krbn::key_code> to_key_codes;
+  };
 
-  // CODER LAYOUT
-  // -------------------
+  class coder_layout final {
+  public:
+      std::vector<coder_layout_mapping> navigation_mapping;
+      std::vector<coder_layout_mapping> navigation_extra_mapping;
+      std::vector<coder_layout_mapping> coding_mapping;
+      nlohmann::json json_;
+
+      coder_layout(void) {
+        try {
+          /**
+           * TODO: automatically locate config file and automatically create default config file
+           *
+           * FORMAT:
+           *
+           * {
+           *   "layers": {
+           *     "navigation": {
+           *       "mapping": {
+           *         "j": "left_arrow",
+           *         "h": ["left_shift", "left_arrow"]
+           *       }
+           *     }
+           *   }
+           * }
+           *
+           */
+          std::ifstream input("/Users/epegzz/.coder_layout/config.json");
+          json_ = nlohmann::json::parse(input);
+
+          navigation_mapping = get_key_code_mapping_from_json_object(json_["layers"]["navigation"]["mapping"]);
+          navigation_extra_mapping = get_key_code_mapping_from_json_object(json_["layers"]["navigation_extra"]["mapping"]);
+
+        } catch (std::exception& e) {
+          logger::get_logger().warn("parse error: {0}", e.what());
+        }
+      }
+
+      std::vector<coder_layout_mapping> get_key_code_mapping_from_json_object(const nlohmann::json& json) {
+        std::vector<coder_layout_mapping> v;
+
+        if (json.is_object()) {
+          for (auto it = json.begin(); it != json.end(); ++it) {
+            coder_layout_mapping mapping_;
+
+            std::string from = it.key();
+            auto from_key_code = krbn::types::get_key_code(from);
+            if (!from_key_code) {
+              logger::get_logger().warn("unknown key_code:{0}", from);
+              continue;
+            } else {
+              mapping_.from_key_code = *from_key_code;
+            }
+
+            auto value = it.value();
+            if (value.is_string()) {
+              auto to_key_code = krbn::types::get_key_code(value);
+              if (!to_key_code) {
+                logger::get_logger().warn("unknown key_code:{0}", value);
+                continue;
+              } else {
+                mapping_.to_key_codes.push_back(*to_key_code);
+              }
+            } else if (value.is_array()) {
+              for (auto to : value) {
+                auto to_key_code = krbn::types::get_key_code(to);
+                if (!to_key_code) {
+                  logger::get_logger().warn("unknown key_code:{0}", to);
+                  continue;
+                } else {
+                  mapping_.to_key_codes.push_back(*to_key_code);
+                }
+              }
+            } else {
+              logger::get_logger().warn("unknown mapping value format:{0}", it.value());
+            }
+
+            v.push_back(mapping_);
+          }
+        }
+
+        return v;
+      }
+  };
+
   bool MOD_APP_SWITCH = false;
   bool MOD_SPACEBAR = false;
+  bool MOD_NAVIGATION = false;
   bool app_switch_triggered = false;
+  coder_layout coder_layout_;
   std::unique_ptr<gcd_utility::main_queue_timer> spacebar_timer_;
 
   void post_key(std::string key_name) {
@@ -379,7 +474,7 @@ private:
         post_key(*key, pressed);
       }
     } else {
-      logger::get_logger().warn("invalid key: {1}", key_name);
+      logger::get_logger().warn("invalid key: {0}", key_name);
     }
   }
 
@@ -476,10 +571,11 @@ private:
       return true;
     }
 
-    // SPACEBAR as SHIFT
+    // SPACEBAR as space, shift or escape
     // ----------------------
     //
     // Keeping space bar pressed will make it act as shift key.
+    // TODO: map TAB to shift when pressed as well
     //
     if (pressed) {
       if (is_key(key_code, "spacebar")) {
@@ -510,7 +606,11 @@ private:
         // pressed meanwhile, then post a space
         if (spacebar_timer_ != nullptr) {
           spacebar_timer_ = nullptr;
-          post_key("spacebar");
+          if (MOD_NAVIGATION) {
+            post_key("escape");
+          } else {
+            post_key("spacebar");
+          }
           return true;
         } else {
           post_key("left_shift", false);
@@ -523,8 +623,39 @@ private:
     // NAVIGATION LAYER
     // ----------------------
     //
-    // Pressing Caps-Lock or quote activates navigation layer.
+    // Pressing Caps-Lock or quote activates coding layer.
+    // Pressing left_command navigation layer.
     //
+
+    //if (is_key(key_code, "caps_lock") || is_key(key_code, "quote")) {
+    if (is_key(key_code, "left_command")) {
+      MOD_NAVIGATION = pressed;
+      return true;
+    }
+
+    if (MOD_NAVIGATION) {
+      auto mappings = MOD_SPACEBAR ?
+                      coder_layout_.navigation_extra_mapping :
+                      coder_layout_.navigation_mapping;
+
+      // Allow mods in navigation mode
+      // TODO: move further up and replace simple modifications from karabiner
+      if (is_key(key_code, "non_us_backslash")) return false;
+      if (is_key(key_code, "1")) return false;
+      if (is_key(key_code, "2")) return false;
+      if (is_key(key_code, "3")) return false;
+
+      for (const auto& mapping : mappings) {
+        if (key_code == mapping.from_key_code) {
+          for (auto & to_key_code : mapping.to_key_codes) {
+            if (MOD_SPACEBAR) post_key("left_shift", false); // make sure left_shift from spacebar is not active
+            post_key(to_key_code, pressed);
+          }
+          return true;
+        }
+      }
+      return true;
+    }
 
     return false;
   }
@@ -532,9 +663,11 @@ private:
   void reset_coder_layout(void) {
     MOD_APP_SWITCH = false;
     MOD_SPACEBAR = false;
+    MOD_NAVIGATION = false;
     app_switch_triggered = false;
     spacebar_timer_ = nullptr;
   }
+  // ----- end coder layout -------
 
 
 

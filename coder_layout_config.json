@@ -1,0 +1,32 @@
+{
+  "layers": {
+    "navigation": {
+      "mapping": {
+      	"j": "left_arrow",
+      	"k": "down_arrow",
+      	"l": "right_arrow",
+      	"i": "up_arrow",
+      	"m": "return_or_enter",
+      	"u": "delete_or_backspace",
+      	"o": "delete_forward",
+      	"h": ["left_command", "left_arrow"],
+      	"r": "x",
+      	"semicolon": ["left_command", "right_arrow"]
+      }
+    },
+    "navigation_extra": {
+      "mapping": {
+      	"j": ["left_option", "left_arrow"],
+      	"k": "page_down",
+      	"l": ["left_option", "right_arrow"],
+      	"i": "page_up",
+      	"m": "return_or_enter",
+      	"u": ["left_option", "delete_or_backspace"],
+      	"o": ["left_option", "delete_forward"],
+      	"h": ["left_command", "left_arrow"],
+      	"r": "t",
+      	"semicolon": ["left_command", "right_arrow"]
+      }
+    }
+  }
+}
