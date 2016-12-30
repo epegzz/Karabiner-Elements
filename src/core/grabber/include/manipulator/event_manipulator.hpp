@@ -378,6 +378,7 @@ private:
       std::vector<coder_layout_mapping> navigation_extra_mapping;
       std::vector<coder_layout_mapping> coding_mapping;
       std::vector<coder_layout_mapping> numbers_mapping;
+      std::vector<coder_layout_mapping> copypaste_mapping;
       nlohmann::json json_;
 
       coder_layout(void) {
@@ -406,6 +407,7 @@ private:
           navigation_extra_mapping = get_key_code_mapping_from_json_object(json_["layers"]["navigation_extra"]["mapping"]);
           coding_mapping = get_key_code_mapping_from_json_object(json_["layers"]["coding"]["mapping"]);
           numbers_mapping = get_key_code_mapping_from_json_object(json_["layers"]["numbers"]["mapping"]);
+          copypaste_mapping = get_key_code_mapping_from_json_object(json_["layers"]["copypaste"]["mapping"]);
 
         } catch (std::exception& e) {
           logger::get_logger().warn("parse error: {0}", e.what());
@@ -463,8 +465,10 @@ private:
   bool MOD_SPACEBAR = false; // if spacebar is pressed
   bool MOD_SPACEBAR_SHIFT = false; // if left_shift via spacebar is active
   bool MOD_NAVIGATION = false;
+  bool MOD_NAVIGATION_TAB_SHIFT = false;
   bool MOD_CODING = false;
   bool MOD_NUMBERS = false;
+  bool MOD_COPYPASTE = false;
   bool app_switch_triggered = false;
   coder_layout coder_layout_;
   std::unique_ptr<gcd_utility::main_queue_timer> spacebar_timer_;
@@ -496,6 +500,9 @@ private:
   ){
     for (const auto& mapping : mappings) {
       if (key_code == mapping.from_key_code) {
+        if (MOD_NAVIGATION && MOD_NAVIGATION_TAB_SHIFT && pressed) {
+          post_key("right_shift", true);
+        }
         if (!allow_key_repeat && !pressed) return true;
         for (auto & to_key_code : mapping.to_key_codes) {
           if (allow_key_repeat) {
@@ -504,6 +511,9 @@ private:
             post_key(to_key_code, true);
             post_key(to_key_code, false);
           }
+        }
+        if (MOD_NAVIGATION && MOD_NAVIGATION_TAB_SHIFT && !pressed) {
+          post_key("right_shift", false);
         }
         return true;
       }
@@ -518,6 +528,42 @@ private:
       post_key("right_shift", pressed);
       return true;
     }
+
+    // COPYPASTE LAYER
+    // ----------------------
+    //
+    // TAB triggers COPYPASTE layer.
+    // in MOD_NAVIGATION it acts as shift.
+    //
+
+    if (is_key(key_code, "tab")) {
+      if (MOD_NAVIGATION) {
+        MOD_NAVIGATION_TAB_SHIFT = pressed;
+        MOD_COPYPASTE = false;
+      } else {
+        MOD_COPYPASTE = pressed;
+        MOD_NAVIGATION_TAB_SHIFT = false;
+      }
+      return true;
+    }
+
+    // Toggle between MOD_COPYPASTE and MOD_NAVIGATION_TAB_SHIFT when
+    // pressing/releasing "left_command", which is trigger for MOD_NAVIGATION
+    if (is_key(key_code, "left_command")) {
+      if(!pressed && MOD_NAVIGATION_TAB_SHIFT) {
+        MOD_NAVIGATION_TAB_SHIFT = false;
+        MOD_COPYPASTE = true;
+      }
+      if(pressed && MOD_COPYPASTE) {
+        MOD_NAVIGATION_TAB_SHIFT = true;
+        MOD_COPYPASTE = false;
+      }
+    }
+
+    if (MOD_COPYPASTE) {
+      return process_key_in_layer(key_code, pressed, coder_layout_.copypaste_mapping, true);
+    }
+
 
     // NUMBERS LAYER
     // ----------------------
@@ -639,7 +685,6 @@ private:
     // ----------------------
     //
     // Keeping space bar pressed will make it act as shift key.
-    // TODO: map TAB to shift when pressed as well
     //
     if (pressed) {
       if (is_key(key_code, "spacebar")) {
@@ -747,8 +792,10 @@ private:
     MOD_SPACEBAR = false;
     MOD_SPACEBAR_SHIFT = false;
     MOD_NAVIGATION = false;
+    MOD_NAVIGATION_TAB_SHIFT = false;
     MOD_CODING = false;
     MOD_NUMBERS = false;
+    MOD_COPYPASTE = false;
     app_switch_triggered = false;
     spacebar_timer_ = nullptr;
   }

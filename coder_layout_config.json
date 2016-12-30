@@ -26,6 +26,29 @@
       	"semicolon": ["left_command", "right_arrow"]
       }
     },
+    "numbers": {
+      "mapping": {
+      	"spacebar": "0",
+      	"m": "1",
+      	"comma": "2",
+      	"period": "3",
+      	"j": "4",
+      	"k": "5",
+      	"l": "6",
+      	"u": "7",
+      	"i": "8",
+      	"o": "9"
+      }
+    },
+    "copypaste": {
+      "mapping": {
+      	"w": ["left_command", "a"],
+      	"e": ["left_command", "t"],
+      	"r": ["left_command", "r"],
+      	"f": ["left_command", "x"],
+      	"spacebar": "escape"
+      }
+    },
     "coding": {
       "mapping": {
       	"q": ["non_us_backslash", "0", "q"],
