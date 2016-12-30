@@ -1,0 +1,94 @@
+{
+  "layers": {
+    "navigation": {
+      "mapping": {
+      	"j": "left_arrow",
+      	"k": "down_arrow",
+      	"l": "right_arrow",
+      	"i": "up_arrow",
+      	"m": "return_or_enter",
+      	"u": "delete_or_backspace",
+      	"o": "delete_forward",
+      	"h": ["left_command", "left_arrow"],
+      	"9": ["left_control", "right_shift", "tab"],
+      	"0": ["left_control", "tab"],
+      	"q": ["right_shift", "tab"],
+      	"w": "tab",
+      	"semicolon": ["left_command", "right_arrow"],
+      	"f": ["left_control", "h"]
+      }
+    },
+    "navigation_extra": {
+      "mapping": {
+      	"j": ["left_option", "left_arrow"],
+      	"k": "page_down",
+      	"l": ["left_option", "right_arrow"],
+      	"i": "page_up",
+      	"m": "return_or_enter",
+      	"u": ["left_option", "delete_or_backspace"],
+      	"o": ["left_option", "delete_forward"],
+      	"h": ["left_command", "left_arrow"],
+      	"semicolon": ["left_command", "right_arrow"]
+      }
+    },
+    "numbers": {
+      "mapping": {
+      	"spacebar": "0",
+      	"m": "1",
+      	"comma": "2",
+      	"period": "3",
+      	"j": "4",
+      	"k": "5",
+      	"l": "6",
+      	"u": "7",
+      	"i": "8",
+      	"o": "9"
+      }
+    },
+    "copypaste": {
+      "mapping": {
+      	"w": ["left_command", "a"],
+      	"e": ["left_command", "t"],
+      	"r": ["left_command", "r"],
+      	"f": ["left_command", "x"],
+      	"spacebar": "escape"
+      }
+    },
+    "coding": {
+      "mapping": {
+      	"q": ["non_us_backslash", "0", "q"],
+      	"w": ["non_us_backslash", "0", "w"],
+      	"e": ["non_us_backslash", "0", "e"],
+      	"r": ["non_us_backslash", "0", "r"],
+      	"t": ["non_us_backslash", "0", "t"],
+      	"y": ["non_us_backslash", "0", "y"],
+      	"u": ["non_us_backslash", "0", "u"],
+      	"i": ["non_us_backslash", "0", "i"],
+      	"o": ["non_us_backslash", "0", "o"],
+      	"p": ["non_us_backslash", "0", "p"],
+      	"open_bracket": ["non_us_backslash", "0", "open_bracket"],
+      	"close_bracket": ["non_us_backslash", "0", "close_bracket"],
+      	"a": ["non_us_backslash", "0", "a"],
+      	"s": ["non_us_backslash", "0", "s"],
+      	"d": ["non_us_backslash", "0", "d"],
+      	"f": ["non_us_backslash", "0", "f"],
+      	"g": ["non_us_backslash", "0", "g"],
+      	"h": ["non_us_backslash", "0", "h"],
+      	"j": ["non_us_backslash", "0", "j"],
+      	"k": ["non_us_backslash", "0", "k"],
+      	"l": ["non_us_backslash", "0", "l"],
+      	"semicolon": ["non_us_backslash", "0", "semicolon"],
+      	"z": ["non_us_backslash", "0", "z"],
+      	"x": ["non_us_backslash", "0", "x"],
+      	"c": ["non_us_backslash", "0", "c"],
+      	"v": ["non_us_backslash", "0", "v"],
+      	"b": ["non_us_backslash", "0", "b"],
+      	"n": ["non_us_backslash", "0", "n"],
+      	"m": ["non_us_backslash", "0", "m"],
+      	"comma": ["non_us_backslash", "0", "comma"],
+      	"period": ["non_us_backslash", "0", "period"],
+      	"slash": ["non_us_backslash", "0", "slash"]
+      }
+    }
+  }
+}
