@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE keyboard PUBLIC "" "file://localhost/System/Library/DTDs/KeyboardLayout.dtd">
+<!--Last edited by Ukelele version 2.2.4 on 2015-03-01 at 23:32 (MEZ)-->
+<keyboard group="126" id="-25277" name="Conex-1464126125558" maxout="20">
+    <layouts>
+        <layout first="0" last="17" modifiers="Modifiers" mapSet="ANSI"/>
+    </layouts>
+    <modifierMap id="Modifiers" defaultIndex="0">
+        <!-- normal layer -->
+        <keyMapSelect mapIndex="0">
+            <!-- shift layer -->
+            <modifier keys=""/>
+        </keyMapSelect>
+        <keyMapSelect mapIndex="1">
+            <modifier keys="anyShift caps?"/>
+        </keyMapSelect>
+    </modifierMap>
+    <keyMapSet id="ANSI">
+        <keyMap index="0">
+      <!--  DANISH_DOLLAR -->
+      <key code="10" action="DANISH_DOLLAR"/>
+      <!--  ESCAPE -->
+      <key code="53" action="&#x001B;"/>
+      <!--  FORWARD_DELETE -->
+      <key code="117" action="&#x007F;"/>
+      <!--  KEY_1 -->
+      <key code="18" action="1"/>
+      <!--  KEY_2 -->
+      <key code="19" action="2"/>
+      <!--  KEY_3 -->
+      <key code="20" action="3"/>
+      <!--  KEY_4 -->
+      <key code="21" action="4"/>
+      <!--  KEY_5 -->
+      <key code="23" action="5"/>
+      <!--  KEY_6 -->
+      <key code="22" action="6"/>
+      <!--  KEY_7 -->
+      <key code="26" action="7"/>
+      <!--  KEY_8 -->
+      <key code="28" action="8"/>
+      <!--  KEY_9 -->
+      <key code="25" action="9"/>
+      <!--  KEY_0 -->
+      <key code="29" action="0"/>
+      <!--  MINUS -->
+      <key code="27" action="MINUS"/>
+      <!--  EQUAL -->
+      <key code="24" action="EQUAL"/>
+      <!--  DELETE -->
+      <key code="51" action="&#x0008;"/>
+      <!--  TAB -->
+      <key code="48" action="&#x0009;"/>
+      <!--  Q -->
+      <key code="12" action="j"/>
+      <!--  W -->
+      <key code="13" action="d"/>
+      <!--  E -->
+      <key code="14" action="u"/>
+      <!--  R -->
+      <key code="15" action="a"/>
+      <!--  T -->
+      <key code="17" action="x"/>
+      <!--  Y -->
+      <key code="16" action="p"/>
+      <!--  U -->
+      <key code="32" action="h"/>
+      <!--  I -->
+      <key code="34" action="l"/>
+      <!--  O -->
+      <key code="31" action="m"/>
+      <!--  P -->
+      <key code="35" action="w"/>
+      <!--  BRACKET_LEFT -->
+      <key code="33" action="q"/>
+      <!--  BRACKET_RIGHT -->
+      <key code="30" action="ß"/>
+      <!--  RETURN -->
+      <key code="36" action="&#x000D;"/>
+      <!--  A -->
+      <key code="0" action="c"/>
+      <!--  S -->
+      <key code="1" action="t"/>
+      <!--  D -->
+      <key code="2" action="i"/>
+      <!--  F -->
+      <key code="3" action="e"/>
+      <!--  G -->
+      <key code="5" action="o"/>
+      <!--  H -->
+      <key code="4" action="b"/>
+      <!--  J -->
+      <key code="38" action="n"/>
+      <!--  K -->
+      <key code="40" action="r"/>
+      <!--  L -->
+      <key code="37" action="s"/>
+      <!--  SEMICOLON -->
+      <key code="41" action="g"/>
+      <!--  Z -->
+      <key code="6" action="f"/>
+      <!--  X -->
+      <key code="7" action="v"/>
+      <!--  C -->
+      <key code="8" action="ü"/>
+      <!--  V -->
+      <key code="9" action="ä"/>
+      <!--  B -->
+      <key code="11" action="ö"/>
+      <!--  N -->
+      <key code="45" action="y"/>
+      <!--  M -->
+      <key code="46" action="z"/>
+      <!--  COMMA -->
+      <key code="43" action=","/>
+      <!--  DOT -->
+      <key code="47" action="."/>
+      <!--  SLASH -->
+      <key code="44" action="k"/>
+      <!--  SPACE -->
+      <key code="49" action="&#x0020;"/>
+      <!--  CURSOR_UP -->
+      <key code="126" action="&#x001E;"/>
+      <!--  CURSOR_LEFT -->
+      <key code="123" action="&#x001C;"/>
+      <!--  CURSOR_DOWN -->
+      <key code="125" action="&#x001F;"/>
+      <!--  CURSOR_RIGHT -->
+      <key code="124" action="&#x001D;"/>
+
+        </keyMap>
+        <keyMap index="1">
+      <!--  KEY_1 -->
+      <key code="18" action="KEY_1"/>
+      <!--  KEY_2 -->
+      <key code="19" action="KEY_2"/>
+      <!--  KEY_3 -->
+      <key code="20" action="KEY_3"/>
+      <!--  KEY_4 -->
+      <key code="21" action="KEY_4"/>
+      <!--  KEY_5 -->
+      <key code="23" action="KEY_5"/>
+      <!--  KEY_6 -->
+      <key code="22" action="KEY_6"/>
+      <!--  KEY_7 -->
+      <key code="26" action="€"/>
+      <!--  KEY_8 -->
+      <key code="28" action="KEY_8"/>
+      <!--  KEY_9 -->
+      <key code="25" action="KEY_9"/>
+      <!--  KEY_0 -->
+      <key code="29" action="KEY_0"/>
+      <!--  MINUS -->
+      <key code="27" action="MINUS"/>
+      <!--  EQUAL -->
+      <key code="24" action="EQUAL"/>
+      <!--  DELETE -->
+      <key code="51" action="&#x0008;"/>
+      <!--  TAB -->
+      <key code="48" action="&#x0009;"/>
+      <!--  Q -->
+      <key code="12" action="J"/>
+      <!--  W -->
+      <key code="13" action="D"/>
+      <!--  E -->
+      <key code="14" action="U"/>
+      <!--  R -->
+      <key code="15" action="A"/>
+      <!--  T -->
+      <key code="17" action="X"/>
+      <!--  Y -->
+      <key code="16" action="P"/>
+      <!--  U -->
+      <key code="32" action="H"/>
+      <!--  I -->
+      <key code="34" action="L"/>
+      <!--  O -->
+      <key code="31" action="M"/>
+      <!--  P -->
+      <key code="35" action="W"/>
+      <!--  BRACKET_LEFT -->
+      <key code="33" action="Q"/>
+      <!--  BRACKET_RIGHT -->
+      <key code="30" action="ẞ"/>
+      <!--  RETURN -->
+      <key code="36" action="&#x000D;"/>
+      <!--  A -->
+      <key code="0" action="C"/>
+      <!--  S -->
+      <key code="1" action="T"/>
+      <!--  D -->
+      <key code="2" action="I"/>
+      <!--  F -->
+      <key code="3" action="E"/>
+      <!--  G -->
+      <key code="5" action="O"/>
+      <!--  H -->
+      <key code="4" action="B"/>
+      <!--  J -->
+      <key code="38" action="N"/>
+      <!--  K -->
+      <key code="40" action="R"/>
+      <!--  L -->
+      <key code="37" action="S"/>
+      <!--  SEMICOLON -->
+      <key code="41" action="G"/>
+      <!--  Z -->
+      <key code="6" action="F"/>
+      <!--  X -->
+      <key code="7" action="V"/>
+      <!--  C -->
+      <key code="8" action="Ü"/>
+      <!--  V -->
+      <key code="9" action="Ä"/>
+      <!--  B -->
+      <key code="11" action="Ö"/>
+      <!--  N -->
+      <key code="45" action="Y"/>
+      <!--  M -->
+      <key code="46" action="Z"/>
+      <!--  SLASH -->
+      <key code="44" action="K"/>
+      <!--  SPACE -->
+      <key code="49" action="&#x0020;"/>
+      <!--  CURSOR_UP -->
+      <key code="126" action="&#x001E;"/>
+      <!--  CURSOR_LEFT -->
+      <key code="123" action="&#x001C;"/>
+      <!--  CURSOR_DOWN -->
+      <key code="125" action="&#x001F;"/>
+      <!--  CURSOR_RIGHT -->
+      <key code="124" action="&#x001D;"/>
+
+        </keyMap>
+    </keyMapSet>
+    <actions>
+    <action id="0">
+      <when state="none" output="0"/>
+      <when state="stateSwitch" next="coding"/>
+    </action>
+    <action id="1">
+      <when state="none" output="1"/>
+    </action>
+    <action id="2">
+      <when state="none" output="2"/>
+    </action>
+    <action id="3">
+      <when state="none" output="3"/>
+    </action>
+    <action id="4">
+      <when state="none" output="4"/>
+    </action>
+    <action id="5">
+      <when state="none" output="5"/>
+    </action>
+    <action id="6">
+      <when state="none" output="6"/>
+    </action>
+    <action id="7">
+      <when state="none" output="7"/>
+    </action>
+    <action id="8">
+      <when state="none" output="8"/>
+    </action>
+    <action id="9">
+      <when state="none" output="9"/>
+    </action>
+    <action id="DANISH_DOLLAR">
+      <when state="none" next="stateSwitch"/>
+    </action>
+    <action id="&#x001B;">
+      <when state="none" output="&#x001B;"/>
+    </action>
+    <action id="&#x007F;">
+      <when state="none" output="&#x007F;"/>
+    </action>
+    <action id="MINUS">
+      <when state="none" output=""/>
+    </action>
+    <action id="EQUAL">
+      <when state="none" output=""/>
+    </action>
+    <action id="&#x0008;">
+      <when state="none" output="&#x0008;"/>
+    </action>
+    <action id="&#x0009;">
+      <when state="none" output="&#x0009;"/>
+    </action>
+    <action id="j">
+      <when state="none" output="j"/>
+      <when state="coding" output="…"/>
+    </action>
+    <action id="d">
+      <when state="none" output="d"/>
+      <when state="coding" output="_"/>
+    </action>
+    <action id="u">
+      <when state="none" output="u"/>
+      <when state="coding" output="["/>
+    </action>
+    <action id="a">
+      <when state="none" output="a"/>
+      <when state="coding" output="]"/>
+    </action>
+    <action id="x">
+      <when state="none" output="x"/>
+      <when state="coding" output="^"/>
+    </action>
+    <action id="p">
+      <when state="none" output="p"/>
+      <when state="coding" output="!"/>
+    </action>
+    <action id="h">
+      <when state="none" output="h"/>
+      <when state="coding" output="&#x003C;"/>
+    </action>
+    <action id="l">
+      <when state="none" output="l"/>
+      <when state="coding" output="&#x003E;"/>
+    </action>
+    <action id="m">
+      <when state="none" output="m"/>
+      <when state="coding" output="="/>
+    </action>
+    <action id="w">
+      <when state="none" output="w"/>
+      <when state="coding" output="&#x0026;"/>
+    </action>
+    <action id="q">
+      <when state="none" output="q"/>
+      <when state="coding" output="@"/>
+    </action>
+    <action id="ß">
+      <when state="none" output="ß"/>
+      <when state="coding" output="°"/>
+    </action>
+    <action id="&#x000D;">
+      <when state="none" output="&#x000D;"/>
+    </action>
+    <action id="c">
+      <when state="none" output="c"/>
+      <when state="coding" output="\"/>
+    </action>
+    <action id="t">
+      <when state="none" output="t"/>
+      <when state="coding" output="/"/>
+    </action>
+    <action id="i">
+      <when state="none" output="i"/>
+      <when state="coding" output="{"/>
+    </action>
+    <action id="e">
+      <when state="none" output="e"/>
+      <when state="coding" output="}"/>
+    </action>
+    <action id="o">
+      <when state="none" output="o"/>
+      <when state="coding" output="*"/>
+    </action>
+    <action id="b">
+      <when state="none" output="b"/>
+      <when state="coding" output="?"/>
+    </action>
+    <action id="n">
+      <when state="none" output="n"/>
+      <when state="coding" output="("/>
+    </action>
+    <action id="r">
+      <when state="none" output="r"/>
+      <when state="coding" output=")"/>
+    </action>
+    <action id="s">
+      <when state="none" output="s"/>
+      <when state="coding" output="-"/>
+    </action>
+    <action id="g">
+      <when state="none" output="g"/>
+      <when state="coding" output=":"/>
+    </action>
+    <action id="f">
+      <when state="none" output="f"/>
+      <when state="coding" output="#"/>
+    </action>
+    <action id="v">
+      <when state="none" output="v"/>
+      <when state="coding" output="$"/>
+    </action>
+    <action id="ü">
+      <when state="none" output="ü"/>
+      <when state="coding" output="|"/>
+    </action>
+    <action id="ä">
+      <when state="none" output="ä"/>
+      <when state="coding" output="~"/>
+    </action>
+    <action id="ö">
+      <when state="none" output="ö"/>
+      <when state="coding" output="`"/>
+    </action>
+    <action id="y">
+      <when state="none" output="y"/>
+      <when state="coding" output="+"/>
+    </action>
+    <action id="z">
+      <when state="none" output="z"/>
+      <when state="coding" output="%"/>
+    </action>
+    <action id=",">
+      <when state="none" output=","/>
+      <when state="coding" output="&#x0022;"/>
+    </action>
+    <action id=".">
+      <when state="none" output="."/>
+      <when state="coding" output="'"/>
+    </action>
+    <action id="k">
+      <when state="none" output="k"/>
+      <when state="coding" output=";"/>
+    </action>
+    <action id="&#x0020;">
+      <when state="none" output="&#x0020;"/>
+    </action>
+    <action id="&#x001E;">
+      <when state="none" output="&#x001E;"/>
+    </action>
+    <action id="&#x001C;">
+      <when state="none" output="&#x001C;"/>
+    </action>
+    <action id="&#x001F;">
+      <when state="none" output="&#x001F;"/>
+    </action>
+    <action id="&#x001D;">
+      <when state="none" output="&#x001D;"/>
+    </action>
+    <action id="KEY_1">
+      <when state="none" output=""/>
+    </action>
+    <action id="KEY_2">
+      <when state="none" output=""/>
+    </action>
+    <action id="KEY_3">
+      <when state="none" output=""/>
+    </action>
+    <action id="KEY_4">
+      <when state="none" output=""/>
+    </action>
+    <action id="KEY_5">
+      <when state="none" output=""/>
+    </action>
+    <action id="KEY_6">
+      <when state="none" output=""/>
+    </action>
+    <action id="€">
+      <when state="none" output="€"/>
+    </action>
+    <action id="KEY_8">
+      <when state="none" output=""/>
+    </action>
+    <action id="KEY_9">
+      <when state="none" output=""/>
+    </action>
+    <action id="KEY_0">
+      <when state="none" output=""/>
+    </action>
+    <action id="J">
+      <when state="none" output="J"/>
+    </action>
+    <action id="D">
+      <when state="none" output="D"/>
+    </action>
+    <action id="U">
+      <when state="none" output="U"/>
+    </action>
+    <action id="A">
+      <when state="none" output="A"/>
+    </action>
+    <action id="X">
+      <when state="none" output="X"/>
+    </action>
+    <action id="P">
+      <when state="none" output="P"/>
+    </action>
+    <action id="H">
+      <when state="none" output="H"/>
+    </action>
+    <action id="L">
+      <when state="none" output="L"/>
+    </action>
+    <action id="M">
+      <when state="none" output="M"/>
+    </action>
+    <action id="W">
+      <when state="none" output="W"/>
+    </action>
+    <action id="Q">
+      <when state="none" output="Q"/>
+    </action>
+    <action id="ẞ">
+      <when state="none" output="ẞ"/>
+    </action>
+    <action id="C">
+      <when state="none" output="C"/>
+    </action>
+    <action id="T">
+      <when state="none" output="T"/>
+    </action>
+    <action id="I">
+      <when state="none" output="I"/>
+    </action>
+    <action id="E">
+      <when state="none" output="E"/>
+    </action>
+    <action id="O">
+      <when state="none" output="O"/>
+    </action>
+    <action id="B">
+      <when state="none" output="B"/>
+    </action>
+    <action id="N">
+      <when state="none" output="N"/>
+    </action>
+    <action id="R">
+      <when state="none" output="R"/>
+    </action>
+    <action id="S">
+      <when state="none" output="S"/>
+    </action>
+    <action id="G">
+      <when state="none" output="G"/>
+    </action>
+    <action id="F">
+      <when state="none" output="F"/>
+    </action>
+    <action id="V">
+      <when state="none" output="V"/>
+    </action>
+    <action id="Ü">
+      <when state="none" output="Ü"/>
+    </action>
+    <action id="Ä">
+      <when state="none" output="Ä"/>
+    </action>
+    <action id="Ö">
+      <when state="none" output="Ö"/>
+    </action>
+    <action id="Y">
+      <when state="none" output="Y"/>
+    </action>
+    <action id="Z">
+      <when state="none" output="Z"/>
+    </action>
+    <action id="K">
+      <when state="none" output="K"/>
+    </action>
+
+    </actions>
+    <terminators>
+      <when state="stateSwitch"     output="" />
+      <when state="coding"     output="" />
+  </terminators>
+</keyboard>
