@@ -51,6 +51,9 @@
       	"e": ["left_command", "t"],
       	"r": ["left_command", "r"],
       	"f": ["left_command", "x"],
+        "3": ["left_command", "z"],
+        "2": ["left_shift", "left_command", "z"],
+        "1": ["left_option", "left_command", "z"],
       	"spacebar": "escape"
       }
     },

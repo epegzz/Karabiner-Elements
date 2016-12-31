@@ -21,5 +21,17 @@ Mapping based on German keyboard layout
  Q | Shift-Tab | 
  W | Tab |
  Space | Escape |
- M | Enter
+ M | Enter |
+
+### CopyPaste
+
+ Key | Mapping | Description
+  --- | ---- | ----
+ W | Cmd-C | Copy 
+ E | Cmd-X | Cut
+ R | Cmd-A | Select All
+ F | Cmd-V | Paste
+ 1 | Opt-Cmd-F | Find/Replace
+ 2 | Shift-Cmd-F | Globl Find/Replace 
+ 3 | Cmd-F | Find
 
