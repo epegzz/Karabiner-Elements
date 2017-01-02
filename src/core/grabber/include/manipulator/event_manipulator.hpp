@@ -573,10 +573,12 @@ private:
     if (is_key(key_code, "left_command")) {
       if(!pressed && MOD_NAVIGATION_TAB_SHIFT) {
         MOD_NAVIGATION_TAB_SHIFT = false;
+        MOD_NAVIGATION = false;
         MOD_COPYPASTE = true;
       }
       if(pressed && MOD_COPYPASTE) {
         MOD_NAVIGATION_TAB_SHIFT = true;
+        MOD_NAVIGATION = true;
         MOD_COPYPASTE = false;
       }
     }
