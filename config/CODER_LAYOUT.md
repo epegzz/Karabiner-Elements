@@ -21,7 +21,7 @@ Mapping based on German keyboard layout
  Space | Escape |
  M | Enter |
 
-### CopyPaste
+### Editing
 
  Key | Mapping | Description
   --- | ---- | ----
@@ -29,7 +29,12 @@ Mapping based on German keyboard layout
  E | Cmd-X | Cut
  R | Cmd-A | Select All
  F | Cmd-V | Paste
- 1 | Opt-Cmd-F | Find/Replace
- 2 | Shift-Cmd-F | Globl Find/Replace 
+ 1 | F16, 1 | IntelliJ: Refactor - Rename <br> Sublime: ?
+ 2 | F16, 2 | IntelliJ: Edit - Find in Path <br> Sublime: ? 
  3 | Cmd-F | Find
-
+ I | F16, I | IntelliJ: Code - Move Line Up <br> Sublime: ?
+ K | F16, K | IntelliJ: Code - Move Line Down <br> Sublime: ?
+ L | F16, L | IntelliJ: Other - Indent Line or Selection <br> Sublime: ?
+ J | F16, J | IntelliJ: Edit - Unindent Line or Selection <br> Sublime: ?
+ 9 | F16, 9 | IntelliJ: Navigate - File <br> Sublime: ?
+ 0 | F16, 0 | IntelliJ: Navigate - Symbol <br> Sublime: ?

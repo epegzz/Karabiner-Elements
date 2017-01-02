@@ -378,7 +378,7 @@ private:
       std::vector<coder_layout_mapping> navigation_extra_mapping;
       std::vector<coder_layout_mapping> coding_mapping;
       std::vector<coder_layout_mapping> numbers_mapping;
-      std::vector<coder_layout_mapping> copypaste_mapping;
+      std::vector<coder_layout_mapping> editing_mapping;
       nlohmann::json json_;
 
       coder_layout(void) {
@@ -407,7 +407,7 @@ private:
           navigation_extra_mapping = get_key_code_mapping_from_json_object(json_["layers"]["navigation_extra"]["mapping"]);
           coding_mapping = get_key_code_mapping_from_json_object(json_["layers"]["coding"]["mapping"]);
           numbers_mapping = get_key_code_mapping_from_json_object(json_["layers"]["numbers"]["mapping"]);
-          copypaste_mapping = get_key_code_mapping_from_json_object(json_["layers"]["copypaste"]["mapping"]);
+          editing_mapping = get_key_code_mapping_from_json_object(json_["layers"]["editing"]["mapping"]);
 
         } catch (std::exception& e) {
           logger::get_logger().warn("parse error: {0}", e.what());
@@ -468,7 +468,7 @@ private:
   bool MOD_NAVIGATION_TAB_SHIFT = false;
   bool MOD_CODING = false;
   bool MOD_NUMBERS = false;
-  bool MOD_COPYPASTE = false;
+  bool MOD_EDITING = false;
   bool app_switch_triggered = false;
   coder_layout coder_layout_;
   std::unique_ptr<gcd_utility::main_queue_timer> spacebar_timer_;
@@ -541,50 +541,50 @@ private:
     // hyphen = right_control
     // equal_sign = right_shift
     if (is_key(key_code, "non_us_backslash")) { post_key("right_shift", pressed); return true; };
-    if (is_key(key_code, "1")) { post_key("right_control", pressed); return true; };
-    if (is_key(key_code, "2")) { post_key("right_command", pressed); return true; };
-    if (is_key(key_code, "3") && !MOD_APP_SWITCH) { post_key("right_option", pressed); return true; };
-    if (is_key(key_code, "9")) { post_key("right_option", pressed); return true; };
-    if (is_key(key_code, "0")) { post_key("right_command", pressed); return true; };
+    if (is_key(key_code, "1") && !MOD_EDITING) { post_key("right_control", pressed); return true; };
+    if (is_key(key_code, "2") && !MOD_EDITING) { post_key("right_command", pressed); return true; };
+    if (is_key(key_code, "3") && !MOD_EDITING && !MOD_APP_SWITCH) { post_key("right_option", pressed); return true; };
+    if (is_key(key_code, "9") && !MOD_EDITING) { post_key("right_option", pressed); return true; };
+    if (is_key(key_code, "0") && !MOD_EDITING) { post_key("right_command", pressed); return true; };
     if (is_key(key_code, "hyphen")) { post_key("right_control", pressed); return true; };
     if (is_key(key_code, "equal_sign")) { post_key("right_shift", pressed); return true; };
 
 
-    // COPYPASTE LAYER
+    // EDITING LAYER
     // ----------------------
     //
-    // TAB triggers COPYPASTE layer.
+    // TAB triggers EDITING layer.
     // in MOD_NAVIGATION it acts as shift.
     //
 
     if (is_key(key_code, "tab")) {
       if (MOD_NAVIGATION) {
         MOD_NAVIGATION_TAB_SHIFT = pressed;
-        MOD_COPYPASTE = false;
+        MOD_EDITING = false;
       } else {
-        MOD_COPYPASTE = pressed;
+        MOD_EDITING = pressed;
         MOD_NAVIGATION_TAB_SHIFT = false;
       }
       return true;
     }
 
-    // Toggle between MOD_COPYPASTE and MOD_NAVIGATION_TAB_SHIFT when
+    // Toggle between MOD_EDITING and MOD_NAVIGATION_TAB_SHIFT when
     // pressing/releasing "left_command", which is trigger for MOD_NAVIGATION
     if (is_key(key_code, "left_command")) {
       if(!pressed && MOD_NAVIGATION_TAB_SHIFT) {
         MOD_NAVIGATION_TAB_SHIFT = false;
         MOD_NAVIGATION = false;
-        MOD_COPYPASTE = true;
+        MOD_EDITING = true;
       }
-      if(pressed && MOD_COPYPASTE) {
+      if(pressed && MOD_EDITING) {
         MOD_NAVIGATION_TAB_SHIFT = true;
         MOD_NAVIGATION = true;
-        MOD_COPYPASTE = false;
+        MOD_EDITING = false;
       }
     }
 
-    if (MOD_COPYPASTE) {
-      return process_key_in_layer(key_code, pressed, coder_layout_.copypaste_mapping, true);
+    if (MOD_EDITING) {
+      return process_key_in_layer(key_code, pressed, coder_layout_.editing_mapping, true);
     }
 
 
@@ -798,7 +798,7 @@ private:
     MOD_NAVIGATION_TAB_SHIFT = false;
     MOD_CODING = false;
     MOD_NUMBERS = false;
-    MOD_COPYPASTE = false;
+    MOD_EDITING = false;
     app_switch_triggered = false;
     spacebar_timer_ = nullptr;
   }

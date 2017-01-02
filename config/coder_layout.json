@@ -43,15 +43,22 @@
       	"o": "9"
       }
     },
-    "copypaste": {
+    "editing": {
       "mapping": {
       	"w": ["left_command", "a"],
       	"e": ["left_command", "t"],
       	"r": ["left_command", "r"],
       	"f": ["left_command", "x"],
         "3": ["left_command", "z"],
-        "2": ["left_shift", "left_command", "z"],
-        "1": ["left_option", "left_command", "z"],
+        "2": ["f16", "2"],
+        "1": ["f16", "1"],
+        "i": ["f16", "i"],
+		"k": ["f16", "k"],
+		"j": ["f16", "j"],
+		"l": ["f16", "l"],
+		"9": ["f16", "9"],
+		"0": ["f16", "0"],
+		"h": "f16",
       	"spacebar": "escape"
       }
     },
