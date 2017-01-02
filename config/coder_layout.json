@@ -10,8 +10,6 @@
       	"u": "delete_or_backspace",
       	"o": "delete_forward",
       	"h": ["left_command", "left_arrow"],
-      	"9": ["left_control", "right_shift", "tab"],
-      	"0": ["left_control", "tab"],
       	"q": ["right_shift", "tab"],
       	"w": "tab",
       	"semicolon": ["left_command", "right_arrow"],

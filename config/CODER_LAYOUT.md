@@ -16,8 +16,6 @@ Mapping based on German keyboard layout
  Ö | Cmd-Right | End
  U | Delete |
  O | Forward Delete |
- 9 | Ctrl-Shift-Tab | Map to `un-indent line/selection` in editor
- 0 | Ctrl-Tab | Map to `indent line/selection` in editor
  Q | Shift-Tab | 
  W | Tab |
  Space | Escape |
