@@ -1,10 +1,26 @@
 # CODER_LAYOUT
 
+
+### Modifiers on numbers row
+
+ Key | Mapping
+  --- | ---- 
+ 1 | Shift  
+ 2 | Control 
+ 3 | Command
+ 4 | Option
+ 9 | Option
+ 0 | Command
+ ß | Control
+ ` | Shift
+
 ## LAYERS
 
-Mapping based on German keyboard layout
+Layer mapping documentation based on German keyboard layout.
 
 ### Navigation
+
+**Trigger**: Left Command
 
  Key | Mapping | Description
   --- | ---- | ----
@@ -22,6 +38,8 @@ Mapping based on German keyboard layout
  M | Enter |
 
 ### Editing
+
+**Trigger**: Tab
 
  Key | Mapping | Description
   --- | ---- | ----
