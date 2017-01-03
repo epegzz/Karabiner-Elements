@@ -38,3 +38,4 @@ Mapping based on German keyboard layout
  J | F16, J | IntelliJ: Edit - Unindent Line or Selection <br> Sublime: ?
  9 | F16, 9 | IntelliJ: Navigate - File <br> Sublime: ?
  0 | F16, 0 | IntelliJ: Navigate - Symbol <br> Sublime: ?
+ ß | F16, hyphen | IntelliJ: Navigate - File Structure <br> Sublime: ?

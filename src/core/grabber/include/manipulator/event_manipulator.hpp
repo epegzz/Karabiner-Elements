@@ -546,7 +546,7 @@ private:
     if (is_key(key_code, "3") && !MOD_EDITING && !MOD_APP_SWITCH) { post_key("right_option", pressed); return true; };
     if (is_key(key_code, "9") && !MOD_EDITING) { post_key("right_option", pressed); return true; };
     if (is_key(key_code, "0") && !MOD_EDITING) { post_key("right_command", pressed); return true; };
-    if (is_key(key_code, "hyphen")) { post_key("right_control", pressed); return true; };
+    if (is_key(key_code, "hyphen") && !MOD_EDITING) { post_key("right_control", pressed); return true; };
     if (is_key(key_code, "equal_sign")) { post_key("right_shift", pressed); return true; };
 
 
