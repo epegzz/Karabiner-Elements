@@ -543,7 +543,7 @@ private:
     if (is_key(key_code, "non_us_backslash")) { post_key("right_shift", pressed); return true; };
     if (is_key(key_code, "1") && !MOD_EDITING) { post_key("right_control", pressed); return true; };
     if (is_key(key_code, "2") && !MOD_EDITING) { post_key("right_command", pressed); return true; };
-    if (is_key(key_code, "3") && !MOD_EDITING && !MOD_APP_SWITCH) { post_key("right_option", pressed); return true; };
+    if (is_key(key_code, "3") && !MOD_EDITING && !MOD_APP_SWITCH && !MOD_SPACEBAR) { post_key("right_option", pressed); return true; };
     if (is_key(key_code, "9") && !MOD_EDITING) { post_key("right_option", pressed); return true; };
     if (is_key(key_code, "0") && !MOD_EDITING) { post_key("right_command", pressed); return true; };
     if (is_key(key_code, "hyphen") && !MOD_EDITING) { post_key("right_control", pressed); return true; };
@@ -658,8 +658,8 @@ private:
     // Requires window-switching to be mapped to ctrl-cmd-tab
     //
 
-    // next window by pressing "5".
-    if (is_key(key_code, "5") && MOD_SPACEBAR) {
+    // next window by pressing "3".
+    if (is_key(key_code, "3") && MOD_SPACEBAR) {
       if (pressed) {
         post_key("left_command", true);
         post_key("left_control", true);
